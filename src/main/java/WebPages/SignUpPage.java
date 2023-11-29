@@ -1,51 +1,85 @@
 package WebPages;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
-public class SignUpPage {
-    SignUpPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
-    }
-    WebDriver driver;
-    @FindBy(how = How.XPATH , using = "//input[@data-testid='first-name']")
-    WebElement firstNameInputField;
-    @FindBy(how = How.XPATH , using = "//input[@data-testid='last-name']")
-    WebElement lastNameInputField;
-    @FindBy(how = How.XPATH , using = "//input[@data-testid='email']")
-    WebElement emailInputField;
-    @FindBy(how = How.XPATH , using = "//input[@data-testid='password']")
-    WebElement passwordInputField;
-    @FindBy(how = How.XPATH , using = "//input[@data-testid='confirm-password']")
-    WebElement confirmPasswordInputField;
-    @FindBy(how = How.XPATH , using = "//input[@data-testid='submit']")
-    WebElement signUpButton;
+public class SignUpPage extends BasePage {
+    private final By firstNameInputFieldLocator = By.xpath("//input[@data-testid='first-name']");
+    private final By lastNameInputFieldLocator = By.xpath("//input[@data-testid='last-name']");
+    private final By emailInputFieldLocator = By.xpath("//input[@data-testid='email']");
+    private final By passwordInputFieldLocator = By.xpath("//input[@data-testid='password']");
+    private final By confirmPasswordInputFieldLocator = By.xpath("//input[@data-testid='confirm-password']");
+    private final By signUpButtonLocator = By.xpath("//button[@data-testid='submit']");
+    private final By signUpHeaderLocator = By.xpath("//h2[@data-testid='header']");
+    private final By errorMessageFirstNameLocator = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div[1]/p");
+    private final By errorMessageLastNameLocator = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div[2]/p");
 
-    public void setFirstNameInputField(String firstName){
-        firstNameInputField.sendKeys(firstName);
-    }
+    private final By errorMessageEmailLocator = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div[3]/p");
 
-    public void setLastNameInputField(String lastName){
-        lastNameInputField.sendKeys(lastName);
+    private final By errorMessagePanalEmailLocator = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div[6]/div[2]");
+
+    private final By errorMessagePasswordLocator = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div[4]/p");
+
+
+    private final By errorMessageConfirmationPasswordLocator = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div[5]/p");
+
+    private final By hyperLinkGoToLogInPageLocator = By.xpath("//h2[@data-testid='go-login']");
+
+    public void setFirstNameInputField(String firstName) {
+        setData(firstNameInputFieldLocator, firstName);
     }
 
-    public void setPasswordInputField(String password){
-        passwordInputField.sendKeys(password);
+    public void setLastNameInputField(String lastName) {
+        setData(lastNameInputFieldLocator, lastName);
     }
 
-    public void setConfirmPasswordInputField(String confirmPassword){
-        confirmPasswordInputField.sendKeys(confirmPassword);
+    public void setEmailInputField(String email) {
+        setData(emailInputFieldLocator, email);
     }
 
-    public ToDoPage clickOnSignUpButton(){
-        signUpButton.click();
-        return new ToDoPage(driver);
+    public void setPasswordInputField(String password) {
+        setData(passwordInputFieldLocator, password);
     }
 
 
+    public String getErrorMessageFirstNameInputField() {
+        return getText(errorMessageFirstNameLocator);
+    }
 
+    public String getErrorMessagePasswordInputField() {
+        return getText(errorMessagePasswordLocator);
+    }
+
+    public String getErrorMessageLastNameInputField() {
+        return getText(errorMessageLastNameLocator);
+    }
+
+    public String getErrorMessageEmailInputField() {
+        return getText(errorMessageEmailLocator);
+    }
+
+    public String getErrorMessagePanalEmailInputField() {
+        return getText(errorMessagePanalEmailLocator);
+    }
+
+    public String getErrorMessageConfirmationPasswordInputField() {
+        return getText(errorMessageConfirmationPasswordLocator);
+    }
+
+    public void setConfirmPasswordInputField(String confirmPassword) {
+        setData(confirmPasswordInputFieldLocator, confirmPassword);
+    }
+
+
+    public WebElement getSignUpHeader() {
+        return find(signUpHeaderLocator);
+    }
+
+    public void clickOnSignUpButton() {
+        click(signUpButtonLocator);
+    }
+
+    public void clickOnDoYouHaveAccount() {
+        click(hyperLinkGoToLogInPageLocator);
+    }
 }

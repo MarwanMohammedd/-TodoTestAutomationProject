@@ -6,47 +6,61 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LogInPage {
-    public LogInPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
-    }
-    WebDriver driver;
-    @FindBy(how = How.XPATH, using = "//input[@data-testid='email']")
-    WebElement userEmailInputField;
-    @FindBy(how = How.XPATH, using = "//input[@data-testid='password']")
-    WebElement passwordInputField;
-    @FindBy(how = How.XPATH, using = "//button[@data-testid='submit']")
-    WebElement logInButton;
-    @FindBy(how = How.XPATH, using = "//h2[@class = 'sc-dlnjwi emTkDB']")
-    WebElement logInPageHeader;
-    //div[@class='MuiAlert-message']
-    @FindBy(how = How.XPATH, using = "//div[@class='MuiAlert-message']")
-    WebElement inValidLogInPanal;
-    @FindBy(how = How.XPATH, using = "//div[@class='MuiAlert-message']")
-    WebElement inValidLogInCombination;
+public class LogInPage extends BasePage {
 
+    private final By userEmailInputFieldLocator = By.xpath("//input[@data-testid='email']");
+    private final By passwordInputFieldLocator = By.xpath("//input[@data-testid='password']");
+    private final By logInButtonLocator = By.xpath("//button[@data-testid='submit']");
+    private final By logInPageHeaderLocator = By.xpath("//h2[@class = 'sc-dlnjwi emTkDB']");
+    private final By inValidLogInPanalLocator = By.xpath("//div[@class='MuiAlert-message']");
+    private final By inValidLogInCombinationLocator = By.xpath("//div[@class='MuiAlert-message']");
+    private final By signUpHyperLinkLocator = By.xpath("//h2[@data-testid='signup']");
 
-    public void setEmail(String userEmail){
-        userEmailInputField.sendKeys(userEmail);
+    private final By inValidPasswordMessage = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div[2]/p");
+    private final By invalidMessagePanal = By.xpath("//div[@data-testid='error-alert']");
+
+    private final By signUpButtonLocator = By.linkText("Login");
+    public void setEmail(String userEmail) {
+        setData(userEmailInputFieldLocator, userEmail);
     }
 
-    public void setPassword(String userPassword){
-        passwordInputField.sendKeys(userPassword);
+    public void setPassword(String userPassword) {
+        setData(passwordInputFieldLocator, userPassword);
     }
 
-    public ToDoPage clickLogInButton(){
-        logInButton.click();
-        return new ToDoPage(driver);
+    public ToDoPage clickLogInButton() {
+        click(logInButtonLocator);
+        return new ToDoPage();
     }
 
-    public WebElement getLogInPageHeader(){
-        return logInPageHeader;
+    public String getLogInPageHeaderText() {
+        return getText(logInPageHeaderLocator);
     }
 
-    public WebElement getInValidLogInPanal(){
-        return inValidLogInPanal;
+    public WebElement getInValidLogInPanal() {
+        return find(inValidLogInPanalLocator);
     }
 
+    public String getinvalidMessagePanal() {
+        return getText(invalidMessagePanal);
+    }
+
+    public String getInvalidPasswordMessage() {
+        return getText(inValidPasswordMessage);
+    }
+
+    public WebElement getLogInHeaderElement() {
+        return find(logInPageHeaderLocator);
+    }
+
+    public void clickOnSignUpButtonLocator(){
+        click(signUpButtonLocator);
+    }
+
+    public SignUpPage clickSignUpHyperLink() {
+        click(signUpHyperLinkLocator);
+        return new SignUpPage();
+    }
 }
