@@ -42,8 +42,8 @@ public class SignUpPage extends BasePage {
     }
 
 
-    public String getErrorMessageFirstNameInputField() {
-        return getText(errorMessageFirstNameLocator);
+    public WebElement getErrorMessageFirstNameInputField() {
+        return find(errorMessageFirstNameLocator);
     }
 
     public String getErrorMessagePasswordInputField() {
