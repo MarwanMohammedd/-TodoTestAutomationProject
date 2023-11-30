@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="D:/Test Automation University/TodoTestAutomationProject/TodoTestAutomationProject/src/test/java/TestDataClasses">
+        <classes>
+            <class name="TestLogInPage">
+            </class>
+            <class name="TestSignUpPage">
+            </class>
+            <class name="TestToDoPage">
+            </class>
+        </classes>
+    </test>
+</suite>
