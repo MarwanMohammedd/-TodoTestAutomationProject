@@ -59,8 +59,7 @@ public class LogInPage extends BasePage {
         click(signUpButtonLocator);
     }
 
-    public SignUpPage clickSignUpHyperLink() {
+    public void clickSignUpHyperLink() {
         click(signUpHyperLinkLocator);
-        return new SignUpPage();
     }
 }

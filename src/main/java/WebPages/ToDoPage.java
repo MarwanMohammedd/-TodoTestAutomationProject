@@ -1,9 +1,11 @@
 package WebPages;
 
+import jdk.jfr.DataAmount;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+import java.util.function.Function;
 
 public class ToDoPage extends BasePage {
     private final By noAvailableToDosLocator = By.xpath("/html/body/div/div[2]/div/div/h4");
@@ -18,6 +20,7 @@ public class ToDoPage extends BasePage {
     private final By deleteToDoTask = By.xpath("//button[@data-testid='delete']");
     private final By toDoItemsTacks = By.xpath("//h2[@data-testid = 'todo-text']");
     private final By getErrorMessage = By.xpath("//*[@id=\"root\"]/div[2]/div/div/div/p");
+
     public WebElement getNoToDosChecker() {
         return find(noAvailableToDosLocator);
     }
@@ -31,12 +34,14 @@ public class ToDoPage extends BasePage {
     }
 
     public void testValueFromLocalStorage(String value) throws InterruptedException {
+        String values = "";
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-        String values = (String) javascriptExecutor.executeScript("return window.localStorage.getItem('user')");
+        Thread.sleep(5000);
+        values = (String) javascriptExecutor.executeScript("return window.localStorage.getItem('user')");
         String returnedResult = values.replace("Marwan", value);
         javascriptExecutor.executeScript(String.format("window.localStorage.setItem('user' , '%s')", returnedResult));
-       // Thread.sleep(3000);
         driver.navigate().refresh();
+
     }
 
     public void addToDoItem(String toDoItem) {
@@ -67,12 +72,13 @@ public class ToDoPage extends BasePage {
         return getText(toDoItemsTacks);
     }
 
-    public WebElement getErrorMessage(){
+    public WebElement getErrorMessage() {
         return find(getErrorMessage);
 
     }
-public WebElement getWelcomeHeaderMessageElement(){
+
+    public WebElement getWelcomeHeaderMessageElement() {
         return find(welcomeHeaderMessageLocator);
-}
+    }
 
 }
